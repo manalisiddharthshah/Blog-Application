@@ -1,0 +1,79 @@
+{% extends 'navbar.html.twig' %}
+
+{% block title %}My Blog Posts{% endblock %}
+{% block sub_content %}
+
+<!-- BEGIN: Content-->
+
+            <div class="app-content content">
+                <div class="content-wrapper">
+                    <div class="content-header row">
+                    </div>
+                    <div class="content-body">
+                    <!-- File export table -->
+                    <section id="file-export">
+                    
+                    {% for blogs in blog_post %}
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">{{blogs.title}}</h4>
+                                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="fas fa-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="fas fa-expand"></i></a></li>
+                                            <li><a data-action="close"><i class="far fa-window-close"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body card-dashboard">
+                                        <b>BLOG TITLE : {{blogs.title}}</b><br>
+                                        <b>BLOG CATEGORY : </b>{{blogs.category}}<br>
+                                        <b>BLOG CONTENT : </b>{{blogs.content}}<br>
+                                        <b>BLOG AUTHOR :</b>{{blogs.username}}<br>
+                                        {% if blogs.postedDate %}
+                                            <b>POSTED DATE : </b>{{blogs.postedDate}}<br>
+                                            <br>
+                                            <h4><a href="/show-comment/{{blogs.id}}">View Comments</a></h4>
+                                        {% else %}
+                                        <form action="{{path('blog_post')}}" method="post" class="form-horizontal">
+                                            <input type="hidden" value="{{blogs.id}}" name="id">
+                                            <div class="form-actions">
+                                                <input type="submit" class="btn btn-primary" id="publish" value="Publish">
+                                            </div>
+                                        </form>
+                                        {% endif %}
+                                        {% if comment_post is defined %}
+                                            {% if blogs.id == blogId %}
+                                                {% if comment_post == "Null" %}
+                                                    <b>No comment Exists </b>
+                                                {% else %}
+                                                    {% for comments in comment_post %}
+                                                    <br>
+                                                        <b>TITLE : </b>{{comments.commentTitle}}<br>
+                                                        <b>DESCRIPTION : </b>{{comments.commentDiscription}}<br>
+                                                        <b>DATE : </b>{{comments.createdDate}}<br>
+                                                        <br>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endif %}                             
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% endfor %} 
+                    </div>
+                </section>
+                <!-- File export table -->
+            </div>
+        </div>
+    </div>
+<!-- END: Content-->
+
+{% endblock %}

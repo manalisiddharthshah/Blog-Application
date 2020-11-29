@@ -1,0 +1,73 @@
+{% extends 'navbar.html.twig' %}
+
+{% block title %}My Blog Posts{% endblock %}
+{% block sub_content %}
+
+<!-- BEGIN: Content-->
+
+            <div class="app-content content">
+                <div class="content-wrapper">
+                    <div class="content-header row">
+                    </div>
+                    <div class="content-body">
+                    <!-- File export table -->
+                    <section id="file-export">
+                    {% for blogs in blog_post %}
+                    <div class="row">
+                    
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">{{blogs.title}}</h4>
+                                    <a class="heading-elements-toggle"><i class="fa fa-ellipsis-v font-medium-3"></i></a>
+                                    <div class="heading-elements">
+                                        <ul class="list-inline mb-0">
+                                            <li><a data-action="collapse"><i class="fas fa-minus"></i></a></li>
+                                            <li><a data-action="expand"><i class="fas fa-expand"></i></a></li>
+                                            <li><a data-action="close"><i class="far fa-window-close"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-content collapse show">
+                                    <div class="card-body card-dashboard">
+                                        
+                                        <b>BLOG TITLE : {{blogs.title}}</b><br>
+                                        <b>BLOG CATEGORY : </b>{{blogs.category}}<br>
+                                        <b>BLOG CONTENT : </b>{{blogs.content}}<br>
+                                        <b>POSTED DATE : </b>{{blogs.postedDate}}<br>
+                                        <b>BLOG AUTHOR : </b>{{blogs.username}}<br>
+                                        <br>
+                                        <h4 style="color:blue">View Comments</h4>
+
+                                                {% if comment_post is defined %}
+                                                {% set count = 0 %}
+                                        {% for comments in comment_post %}
+                                            {% if comments.blogId==blogs.id %}
+                                            <br>
+                                                <b>TITLE : </b>{{comments.commentTitle}}<br>
+                                                <b>DESCRIPTION : </b>{{comments.commentDiscription}}<br>
+                                                <b>DATE : </b>{{comments.createdDate}}<br>
+                                                <b>Created by : </b>{{comments.username}}<br>
+                                                {% set count=count+1 %}
+                                                <br>
+                                            {% endif %}       
+                                        {% endfor %}
+                                        {% if count == 0 %}
+                                        <b>No comment Exists </b>
+                                        {% endif %}
+                                        {% endif %}</div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %} 
+                </section>
+                <!-- File export table -->
+            </div>
+        </div>
+    </div>
+<!-- END: Content-->
+
+{% endblock %}

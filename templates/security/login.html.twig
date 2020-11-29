@@ -1,0 +1,61 @@
+{% extends 'navbar.html.twig' %}
+
+{% block title %}Login Page{% endblock %}
+{% block sub_content %}
+<!-- BEGIN: Content-->
+    <div class="app-content content">
+        <div class="content-overlay"></div>
+        <div class="content-wrapper">
+            <div class="content-header row">
+            </div>
+            <div class="content-body">
+                <section class="row flexbox-container">
+                    <div class="col-12 d-flex align-items-center justify-content-center">
+                        <div class="col-lg-4 col-md-8 col-10 box-shadow-2 p-0">
+                            <div class="card border-grey border-lighten-3 px-1 py-1 m-0">
+                                <div class="card-header border-0">
+                                    <div class="card-title text-center">
+                                        <h1>My Blog App</h1>
+                                    </div>
+                                </div>
+                                <div class="card-content">
+                                   <p class="card-subtitle line-on-side text-muted text-center mx-2 my-1"><span>Login</span></p>
+                                    <div class="card-body">
+                                        <form action="{{path('login')}}" method="POST">
+                                            
+                                            {% if error %}
+                                                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                            {% endif %}
+
+                                            User Name :
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                                <input type="text" id="inputName" name="_username" class="form-control" value="{{last_username}}" placeholder="User Name" autofocus>
+                                                  <div class="form-control-position">
+                                                    <i class="fas fa-user"></i>
+                                                  </div>
+                                            </fieldset>
+                                            Password :
+                                            <fieldset class="form-group position-relative has-icon-left">
+                                              <input type="password" name="_password" id="inputPassword" class="form-control" placeholder="Password" required>
+                                                <div class="form-control-position">
+                                                    <i class="fa fa-key"></i>
+                                                </div>
+                                            </fieldset>
+                                            <button class="btn btn-outline-primary btn-block" type="submit">Login</button>                             
+                                        </form>
+                                    </div>
+                                    <p class="card-subtitle line-on-side text-muted text-center font-small-3 mx-2 my-1"><span>New to My Blog App?</span></p>
+                                    <div class="card-body">
+                                        <a href="{{path('register')}}" class="btn btn-outline-danger btn-block">Register</a>
+                                    </div
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- END: Content-->
+
+{% endblock %}
